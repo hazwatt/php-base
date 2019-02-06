@@ -10,6 +10,9 @@
 <?php
 $prenom = 'baptiste';
 echo '<h1> bonjour '.$prenom.' </h1>';
+
+// interpolation de variable possible avec les doubles quotes
+echo "<h1>Bonjour $prenom</h1>";
 ?>
 </body>
 </html>
