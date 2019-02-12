@@ -19,15 +19,39 @@ $eleves = [
 ];
 foreach($eleves as $eleve){
    echo $eleve['nom'];
-   echo ' a eu <br/>';
-   foreach($eleve['notes'] as $note){
-       if(count(-1)){
-           $v='et';
+   echo ' a eu ';
+   foreach($eleve['notes'] as $index => $note){
+    
+       if($index == count($eleve['notes'])-1){
+           $v=' . ';
+       }elseif($index == count($eleve['notes'])-2){
+           $v=' et ';
        }else{
-           $v=',';
+           $v=' , ';
        }
        echo $note.$v;
    }
+   echo '<br/>';
 }
+$somme=0;
+ foreach($eleves[2]['notes'] as $note){
+     
+     $somme = $somme + $note;
+ }
+ $moyenne = $somme/count($eleves[2]['notes']);
+ echo 'Jean a une moyenne de '.$moyenne;
 
-
+ foreach($eleves as $eleve){
+     $somme = 0;
+     foreach($eleve['notes'] as $note){
+        $somme = $somme + $note;
+     }
+     $moyenne = $somme/count($eleve['notes']);
+     if($moyenne < 10){
+echo '<br/>'.$eleve['nom'].' n\'a pas la moyenne';
+     }
+     else{
+         echo '<br/>'.$eleve['nom'].' a la moyenne';
+     }
+// echo '<br/>'.$eleve['nom'].' a une moyenne de '.$moyenne;
+ }
