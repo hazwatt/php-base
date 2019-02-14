@@ -19,6 +19,10 @@ echo acronym($_POST['acro']);
 }
 
 ?>
+<?php
+function conjuguer(){
+    sub($verbe)
+}
 
 
-
+?>
