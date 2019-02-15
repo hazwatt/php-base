@@ -23,6 +23,13 @@
         $fileName = substr(md5(time()),0,8).'_'.$fileName;
         //Ondéplace le fichier à l'endroit désiré
         move_uploaded_file($tmpFile, __DIR__.'/upload/'.$fileName);
+       
+    }
+    $folder = opendir('./upload');
+    while(($file = readdir($folder)) !== false){
+        if($file !== '.' && $file !=='..'){
+            echo '<img width="150" src="upload/'.$file.'">';
+        }
     }
     ?>
 </div>
