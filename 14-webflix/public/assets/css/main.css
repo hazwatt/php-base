@@ -1,0 +1,8 @@
+.movie-cover{
+    height: 380px;
+    background-position: center;
+    background-size: cover;
+}
+.card-img-top{
+    display: none;
+}

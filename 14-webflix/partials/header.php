@@ -20,7 +20,7 @@ require_once __DIR__ . '/../config/database.php';
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
 
 </head>
 
@@ -34,21 +34,23 @@ require_once __DIR__ . '/../config/database.php';
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+      <?php
+      //gestion du menu dynamique
+      $menuItems = [
+          ['label'=>'Acceuil','Link'=>'index.php'],
+          ['label'=> 'Films','Link'=> 'movie_list.php'],
+          ['label'=> 'Catégories','Link'=> 'category_list.php']
+      ];
+      ?>
+
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
+          <?php
+          foreach($menuItems as $items){ ?>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo $items['Link']; ?>"><?php echo $items['label'];?></a>
+
+            </li>
+          <?php } ?>
         </ul>
       </div>
     </div>
