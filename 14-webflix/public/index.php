@@ -21,6 +21,7 @@ include(__DIR__.'/../partials/header.php');
          <a href="#" class="list-group-item"><?php echo $item['name'] ?></a>
      <?php   } ?>
         </div>
+        <a href="movie_add.php" class="btn btn-primary btn-block mt-4">Ajouter un film</a>
 
       </div>
       <!-- /.col-lg-3 -->
@@ -34,15 +35,20 @@ include(__DIR__.'/../partials/header.php');
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
           <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+         <?php $query = $db->query('SELECT * FROM movie WHERE cover IS NOT NULL ORDER BY RAND()');
+         $movies = $query->fetchAll();
+         
+         foreach($movies as $key => $cc) { ?>
+           
+            <div class="carousel-item <?php if($key === 0){echo 'active'; } ?>">
+              <div class="movie-cover" style="background-image: url(assets/img/<?php echo $cc['cover']; ?>)"></div>
             </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-            </div>
+        <?php
+         } 
+        ?>
+         
+          
+            
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -63,15 +69,15 @@ foreach($listFilms as $film){
 ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#">
+              <a href="movie_single.php?id=<?= $film['id']; ?>">
               <img class="card-img-top" src="assets/img/<?php echo $film['cover'] ?>" alt="<?php echo $film['name'] ?>">
-              <div class="movie-cover" style="background-image: url(assets/img/<?php echo $film['cover'] ?>)"></div>
+              <div class="movie-cover" style="background-image: url(assets/img/<?php echo $film['cover']; ?>)"></div>
               </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#"> <?php echo $film['name'] ?> </a>
+                  <a href="movie_single.php?id=<?= $film['id']; ?>"> <?php echo $film['name'] ?> </a>
                 </h4>
-                <h5> <?php echo $date->format('d M Y') ?> </h5>
+                <h5> <?php echo formatFrenchDate($film['date']) ?> </h5>
                 <p class="card-text"> <?php echo $film['description'] ?> </p>
               </div>
               <div class="card-footer">
