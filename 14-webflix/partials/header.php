@@ -1,4 +1,7 @@
 <?php
+// Démarrer la session PHP
+  session_start();
+
 require_once __DIR__ . '/../config/functions.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -48,6 +51,34 @@ require_once __DIR__ . '/../config/database.php';
             <li class="nav-item">
             <a class="nav-link" href="<?php echo $items['Link']; ?>"><?php echo $items['label'];?></a>
 
+            </li>
+          <?php } ?>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <?php if (isset($_SESSION['user'])) { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <?php
+                /**
+                 * On se rend sur https://fr.gravatar.com/site/implement/images/
+                 * On peut créer un compte et y associer un avatar (lié à notre email).
+                 * On doit générer un hash de notre email avec md5().
+                 * On peut ensuite afficher une balise <img> avec un lien vers notre gravatar.
+                 */
+                echo $_SESSION['user']['email']; ?><img src="https://www.gravatar.com/avatar/<?= md5($_SESSION['user']['email']); ?> " />
+
+              </a>
+            </li>
+          <?php } else { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="sign-up.php">
+                Sign up
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">
+                Login
+              </a>
             </li>
           <?php } ?>
         </ul>
