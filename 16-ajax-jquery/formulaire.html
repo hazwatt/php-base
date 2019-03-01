@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    <form id="form"action="form.php" method="post">
+        <input type="text" name="firstname">
+        <input type="text" name="lastname">
+        <button>Envoyer</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $('#form').on('submit', function (event){
+            event.preventDefault();
+            console.log('Formulaire');
+            $.ajax({
+                type: 'POST',
+                url: './form.php',
+                data: { 
+                   lastname: $('input[name="lastname"]').val(),
+                   firstname: $('input[name="firstname"]').val()
+
+                }
+            }).done(function(secret){
+                $('h1').html(secret);
+            });
+        });
+    </script>
+</body>
+</html>
